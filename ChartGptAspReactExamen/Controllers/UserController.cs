@@ -1,4 +1,5 @@
 ﻿using ChartGptAspReactExamen.Models;
+using ChartGptAspReactExamen.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChartGptAspReactExamen.Controllers
@@ -7,6 +8,7 @@ namespace ChartGptAspReactExamen.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
+        DataRepo repo = new DataRepo();
        Context context = new Context();
         [HttpPost("Registration")]
         public ActionResult Registr(MyData data)
@@ -38,5 +40,7 @@ namespace ChartGptAspReactExamen.Controllers
             }
 
         }
+        [HttpGet("GetHistory")]
+        public IEnumerable<DataModel> GetHistory(string login)=>repo.GetHistory(login);
     }
 }
